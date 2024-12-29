@@ -1,0 +1,15 @@
+pipeline{
+	agent any
+	tools{
+	  maven "maven3.9.9"
+	}
+}
+
+stages{
+	stage('clone from scm'){
+	  steps{
+	  sh "echo jenkins should clone from scm"
+	  git branch: 'dev28', url: 'https://github.com/Onomeing/liontech-online-library-web-app.git'
+	  }
+	}
+}
