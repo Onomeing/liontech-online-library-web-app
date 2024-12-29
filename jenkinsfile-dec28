@@ -11,5 +11,16 @@ pipeline{
 	  git branch: 'dev28', url: 'https://github.com/Onomeing/liontech-online-library-web-app.git'
 	  }
 	}
+
+    stage('maven build'){
+	  steps{
+	  sh "echo 'run junit test on the sc'"
+	  sh "echo 'maven is packaging the source code'"
+	  sh "mvn test"
+	  sh "mvn install"
+	  sh "mvn validate"
+	  sh "mvn clean package"
+	  }
+	}
   }
 }
