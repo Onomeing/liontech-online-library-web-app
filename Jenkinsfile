@@ -41,7 +41,7 @@ pipeline{
 
 		stage('deploying to production'){
 			steps{
-				deploy adapters: [tomcat9(path: '', url: 'http://18.118.139.1:8009/manager/html')], contextPath: 'demo-app', war: 'target/*.war'
+				deploy adapters: [tomcat9(credentialsId: 'TOMCAT-CRED2', path: '', url: 'http://18.118.139.1:8009/manager/html')], contextPath: 'demo-1', war: 'target/*.war'
 			}
 		}
 	}
