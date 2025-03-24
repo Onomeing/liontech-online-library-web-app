@@ -24,5 +24,12 @@ pipeline{
 				sh "mvn clean package"
 			}
 		}
+
+		stage('code inspection'){
+			steps{
+				sh "echo 'sonarqube to perform code quality inspection'"
+				sh "mvn sonar:sonar"
+			}
+		}
 	}
 }
