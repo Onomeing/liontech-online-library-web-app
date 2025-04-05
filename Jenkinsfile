@@ -24,11 +24,24 @@ pipeline{
                 sh "mvn clean package"
             }
         }
-        stage ('code inspection'){
+
+        //stage ('code inspection'){
+            //steps{
+                //sh "echo 'sonarqube to perform code quality inspection'"
+                //sh "mvn sonar:sonar"
+            //}
+        //}
+
+            stage('upload to artifact'){
             steps{
-                sh "echo 'sonarqube to perform code quality inspection'"
-                sh "mvn sonar:sonar"
+                sh "echo 'deploy artifact to nexus'"
+                sh "mvn deploy"
             }
         }
-    }
-}
+          stage('deploying to production'){
+            steps{
+                deploy adapters: [tomcat9(credentialsId: 'TOMCAT-CRED2', path: '', url: 'http://13.58.90.241:8009/manager/html')], contextPath: 'demo-1', war: 'target/*.war'
+            }
+        }
+    }    
+}    
